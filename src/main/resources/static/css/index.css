@@ -1,5 +1,5 @@
 /*body{*/
-    /*background: #f0efee;*/
+/*background: #f0efee;*/
 /*}*/
 hr{
     border: none;
@@ -76,6 +76,11 @@ header ul li{
     z-index: 100;
     cursor: pointer;
 }
+.form-group .prompt{
+    /*display: none;*/
+    visibility: hidden;
+    color: red;
+}
 form button{
     margin-right: 10px;
 }
@@ -123,12 +128,6 @@ form button{
     float: right;
     margin-right: 1em;
 }
-.media-footer span{
-    cursor: pointer;
-}
-.media-footer span:hover{
-    color: red;
-}
 .media-footer img{
     margin-right: 10px;
     margin-top: 3px;
@@ -143,4 +142,11 @@ ul.media-list{
     background-color: #ece7e0;
     margin-bottom: 20px;
     padding:10px;
+}
+.delete{
+    border:none;
+    background: none;
+}
+.delete:hover{
+    color: red;
 }
