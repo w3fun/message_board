@@ -43,7 +43,7 @@
                                 <h4 class="modal-title" id="myModalLabel">登录</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="/doLogin" name="login" method="post">
+                                <form name="login" id="loginForm" method="post">
                                     <div class="form-group">
                                         <label for="name">用户名：</label>
                                         <input type="text" class="form-control" id="name" name="name"/>
@@ -61,7 +61,7 @@
                                             <input type="checkbox" id="remember"/>记住密码
                                         </label>
                                     </div>
-                                    <button type="submit" class="loginBtn btn btn-default pull-right">登录</button>
+                                    <button type="button" class="loginBtn btn btn-default pull-right">登录</button>
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">取消</button>
                                 </form>
                             </div>
@@ -78,7 +78,7 @@
                                 <h4 class="modal-title" id="myModalLabel1">注册</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="/doRegister" name="sign" method="post">
+                                <form name="sign" id="signForm" method="post">
                                     <div class="form-group">
                                         <label for="name1">用户名：</label>
                                         <input type="text" class="form-control" id="name1" name="name1"/>

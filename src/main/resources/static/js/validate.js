@@ -60,11 +60,39 @@ $('#mySign input').eq(1).on('blur',function () {
     }
 })
 //提交注册信息并跳转页面
+$('.signBtn:first').on('click',function () {
+    var signInput = $('#mySign input');
+    if(!reg.test(signInput.eq(1).val())||signInput.eq(1).val() == ''
+        || signInput.eq(0).val().indexOf(' ') != -1 || signInput.eq(0).val() == ''){
 
+    }else {
+        $.ajax({
+            type:"POST",
+            dataType:"json",
+            url:"",
+            data:{
+                "name1":$('#name1').val(),
+                "password1":$('#password1').val()
+            },
+            success:function (data) {
+                if(data){
+                    alert('注册成功！请登录！');
+                    $('#mySign').fadeOut();
+                    $('#myLogin').fadeIn();
+                }
+                else {
+                    alert('该用户已存在！')
+                }
+            },
+            error:function () {
+                alert('注册失败！请刷新重试')
+                }
+            })
+    }
+})
 //提交登录信息并跳转页面
-
 //记住密码
-$('.loginBtn').eq(0).on('click',function () {
+$('.loginBtn:first').eq(0).on('click',function () {
     var flag = true;
     for(var j = 0;j < 2;j ++)
     {
@@ -74,13 +102,32 @@ $('.loginBtn').eq(0).on('click',function () {
         }
     }
     if(flag) {
-        if($('#remember').attr('checked') == 'checked'){
-            localStorage.setItem('lybName',$('#myLogin input').eq(0).val());
-            localStorage.setItem('lybName',$('#myLogin input').eq(1).val());
-        }
-        sessionStorage.setItem('lybName',$('#myLogin input').eq(0).val());
-        sessionStorage.setItem('lybName',$('#myLogin input').eq(1).val());
-        alert("登录成功")
+        $.ajax({
+            type:"POST",
+            url:"",
+            dataType:'json',
+            data:{
+                "name":$('#name').val(),
+                "password":$('#password').val()
+            },
+            success:function (data) {
+                if(data){
+                    if($('#remember').attr('checked') == 'checked'){
+                        localStorage.setItem('lybName',$('#myLogin input').eq(0).val());
+                        localStorage.setItem('lybPassword',$('#myLogin input').eq(1).val());
+                    }
+                    sessionStorage.setItem('lybName',$('#myLogin input').eq(0).val());
+                    sessionStorage.setItem('lybPassword',$('#myLogin input').eq(1).val());
+                    alert('登录成功！');
+                }else {
+                    alert('登录失败！请检查用户名和密码是否正确')
+                }
+            },
+            error:function () {
+                alert('登录失败，请刷新重试');
+                $('#myLogin').hide();
+            }
+        })
     }
 })
 if(localStorage.getItem("lybName") != '' && localStorage.getItem("lybPassWord") != '')
@@ -94,6 +141,8 @@ $('#pub').on('click',function () {
     if($('#word').val() == '') {
         alert('发表内容不能为空！');
     }else {
-        alert("发表成功！");
+        $.ajax({
+
+        })
     }
 })
