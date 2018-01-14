@@ -29,6 +29,28 @@ oWord.on('keydown',function () {
 oWord.on('keyup',function () {
     $('#counter').text(oWord.val().length);
 })
+//限制验证码只能输字母和数字
+$.fn.onlyNumAlpha = function () {
+    $(this).keypress(function (event) {
+        var eventObj = event || e;
+        var keyCode = eventObj.keyCode || eventObj.which;
+        if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122))
+            return true;
+        else
+            return false;
+    }).focus(function () {
+        this.style.imeMode = 'disabled';//禁止中文输入法 兼容性：只支持IE和FF
+    }).bind("paste", function () {
+        var clipboard = window.clipboardData.getData("Text");//获取剪贴板里的内容
+        if (/^(\d|[a-zA-Z])+$/.test(clipboard))
+            return true;
+        else
+            return false;
+    });
+};
+$(function () {
+    $('.identify').onlyNumAlpha();
+})
 //登录注册验证
 var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/;
 $('#myLogin input').eq(0).on('blur',function () {
@@ -140,6 +162,7 @@ $('.loginBtn:first').eq(0).on('click',function () {
             },
             error:function () {
                 alert('登录失败，请刷新重试');
+                $('#myLogin').modal('hide');
             }
         })
     }else{
