@@ -84,6 +84,24 @@ header ul li{
 form button{
     margin-right: 10px;
 }
+.identifyCode{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#identify{
+    width: 20%;
+}
+.identifyPic{
+    width: 30%;
+    height: 5rem;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+    margin-left: 3em;
+}
+.change{
+    margin-top: 3rem;
+}
 /*publish*/
 #publish{
     width: 90%;
