@@ -156,13 +156,13 @@ $('.loginBtn:first').eq(0).on('click',function () {
                     sessionStorage.setItem('lybPassword',$('#myLogin input').eq(1).val());
                     alert('登录成功！');
                     $('#myLogin').modal('hide');
+                    $('.login-box').html('welcome! ' + sessionStorage.getItem('lybName'));
                 }else {
                     alert('登录失败！请检查用户名和密码是否正确')
                 }
             },
             error:function () {
                 alert('登录失败，请刷新重试');
-                $('#myLogin').modal('hide');
             }
         })
     }else{
@@ -180,8 +180,28 @@ $('#pub').on('click',function () {
     if($('#word').val() == '') {
         alert('发表内容不能为空！');
     }else {
+        var myDate = new Date();
         $.ajax({
-            type:'POST'
+            type:'POST',
+            url:'',
+            dataType:'json',
+            data:{
+                "author":sessionStorage.getItem('lybName'),
+                "date":myDate.getFullYear()+ '/' +(myDate.getMonth()+1)+ '/' +myDate.getDay(),
+                "content":$('#word').val()
+            },
+            success:function (data) {
+                if(data){
+                    alert('发表成功！');
+                }else {
+                    alert('发表失败！');
+                }
+            },
+            error:function () {
+                alert('发表失败，请刷新重试');
+            }
         })
     }
 })
+
+
