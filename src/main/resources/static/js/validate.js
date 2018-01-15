@@ -128,7 +128,7 @@ $('.signBtn:first').on('click',function () {
 })
 //提交登录信息并跳转页面
 //记住密码
-$('.loginBtn:first').eq(0).on('click',function () {
+$('.loginBtn:first').on('click',function () {
     var flag = true;
     for(var j = 0;j < 3;j ++)
     {
@@ -203,5 +203,6 @@ $('#pub').on('click',function () {
         })
     }
 })
+//评论
 
 

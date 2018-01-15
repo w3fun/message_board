@@ -125,88 +125,96 @@
             </div>
             <span id="counter">0</span><span>/300</span>
             <!--<input type="submit" id="pub" class="btn btn-default pull-right" value="发表"></input>-->
-            <button type="submit" id="pub" class="btn btn-default pull-right">发表</button>
+            <button type="text" id="pub" class="btn btn-default pull-right">发表</button>
         </form>
         <!--published words and comments-->
         <section data-example-id="media-list" id="pub_words">
-            <ul class="media-list ul-list">
-                <li class="media">
-                    <div class="media-left">
-                        <img src="../static/img/boy.png" alt="头像"/>
-                        <span>阿呆</span>
-                    </div>
-                    <div class="media-body comment">
-                        <p>论坛以“共建网络安全为互联网+护航”为主题。来自中央网络安全和信息化领导小组办公室、工
-                            业和信息化部、国家互联网应急中心、中国现代国际关系研究院、中国互联网络信息
-                            中心等政府和专业机构的领导及多位互联网业内知名专家出席了论坛。</p>
-                        <div class="media-footer clearfix">
-                            <button class="delete pull-right">删除</button>
-                            <img src="../static/img/pl.png" class="com" alt="评论" title="评论"/>
-                            <time datatime="2017-10-21">2017/10/21</time>
-                        </div>
-                        <ul class="media-list message">
-                            <hr/>
-                            <li class="media">
-                                <div class="media-left">
-                                    <img src="../static/img/girl-2.png" alt="头像"/>
-                                    <span>秀智</span>
-                                </div>
-                                <div class="media-body">
-                                    <p>
-                                        视直销、不依赖代理，航空公司给机票代理商的售前、售后返现陆续被取消。
-                                        去年7月开始，航空公司给机票代理商的代理费用变为固定数额，一张经济舱
-                                        机票的大约只有10块钱。
-                                    </p>
-                                    <div class="media-footer">
-                                        <button class="delete pull-right">删除</button>
-                                        <time datatime="2017-10-21">2017/10/21</time>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="media-left">
-                                    <img src="../static/img/girl-2.png" alt="头像"/>
-                                    <span>秀智</span>
-                                </div>
-                                <div class="media-body">
-                                    <p>
-                                        视直销、不依赖代理，航空公司给机票代理商的售前、售后返现陆续被取消。
-                                        去年7月开始，航空公司给机票代理商的代理费用变为固定数额，一张经济舱
-                                        机票的大约只有10块钱。
-                                    </p>
-                                    <div class="media-footer">
-                                        <button class="delete pull-right">删除</button>
-                                        <time datatime="2017-10-21">2017/10/21</time>
-                                    </div>
-                                </div>
-                            </li>
+            <!--<ul class="media-list ul-list">-->
+                <!--<li class="media">-->
+                    <!--<div class="media-left">-->
+                        <!--<img src="../static/img/boy.png" alt="头像"/>-->
+                        <!--<span>阿呆</span>-->
+                    <!--</div>-->
+                    <!--<div class="media-body comment">-->
+                        <!--<p>论坛以“共建网络安全为互联网+护航”为主题。来自中央网络安全和信息化领导小组办公室、工-->
+                            <!--业和信息化部、国家互联网应急中心、中国现代国际关系研究院、中国互联网络信息-->
+                            <!--中心等政府和专业机构的领导及多位互联网业内知名专家出席了论坛。</p>-->
+                        <!--<div class="media-footer clearfix">-->
+                            <!--<button class="delete pull-right">删除</button>-->
+                            <!--<img src="../static/img/pl.png" class="com" alt="评论" title="评论"/>-->
+                            <!--<time datatime="2017-10-21">2017/10/21</time>-->
+                            <!--<div class="comSpace vanish">-->
+                                <!--<textarea name="comText" class="comText"></textarea>-->
+                                <!--<button type="text" class="comBtn btn btn-default pull-right">评论</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<ul class="media-list message">-->
+                            <!--<hr/>-->
+                            <!--<li class="media">-->
+                                <!--<div class="media-left">-->
+                                    <!--<img src="../static/img/girl-2.png" alt="头像"/>-->
+                                    <!--<span>秀智</span>-->
+                                <!--</div>-->
+                                <!--<div class="media-body">-->
+                                    <!--<p>-->
+                                        <!--视直销、不依赖代理，航空公司给机票代理商的售前、售后返现陆续被取消。-->
+                                        <!--去年7月开始，航空公司给机票代理商的代理费用变为固定数额，一张经济舱-->
+                                        <!--机票的大约只有10块钱。-->
+                                    <!--</p>-->
+                                    <!--<div class="media-footer">-->
+                                        <!--<button class="delete pull-right">删除</button>-->
+                                        <!--<time datatime="2017-10-21">2017/10/21</time>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<li class="media">-->
+                                <!--<div class="media-left">-->
+                                    <!--<img src="../static/img/girl-2.png" alt="头像"/>-->
+                                    <!--<span>秀智</span>-->
+                                <!--</div>-->
+                                <!--<div class="media-body">-->
+                                    <!--<p>-->
+                                        <!--视直销、不依赖代理，航空公司给机票代理商的售前、售后返现陆续被取消。-->
+                                        <!--去年7月开始，航空公司给机票代理商的代理费用变为固定数额，一张经济舱-->
+                                        <!--机票的大约只有10块钱。-->
+                                    <!--</p>-->
+                                    <!--<div class="media-footer">-->
+                                        <!--<button class="delete pull-right">删除</button>-->
+                                        <!--<time datatime="2017-10-21">2017/10/21</time>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
 
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-            <ul class="media-list ul-list">
-                <li class="media">
-                    <div class="media-left">
-                        <img src="../static/img/boy.png" alt="头像"/>
-                        <span>阿呆</span>
-                    </div>
-                    <div class="media-body message">
-                        <p>论坛以“共建网络安全为互联网+护航”为主题。来自中央网络安全和信息化领导小组办公室、工
-                            业和信息化部、国家互联网应急中心、中国现代国际关系研究院、中国互联网络信息
-                            中心等政府和专业机构的领导及多位互联网业内知名专家出席了论坛。</p>
-                        <div class="media-footer clearfix">
-                            <button class="delete pull-right">删除</button>
-                            <img src="../static/img/pl.png" class="com" alt="评论" title="评论"/>
-                            <time datatime="2017-10-21">2017/10/21</time>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--<ul class="media-list ul-list">-->
+                <!--<li class="media">-->
+                    <!--<div class="media-left">-->
+                        <!--<img src="../static/img/boy.png" alt="头像"/>-->
+                        <!--<span>阿呆</span>-->
+                    <!--</div>-->
+                    <!--<div class="media-body message">-->
+                        <!--<p>论坛以“共建网络安全为互联网+护航”为主题。来自中央网络安全和信息化领导小组办公室、工-->
+                            <!--业和信息化部、国家互联网应急中心、中国现代国际关系研究院、中国互联网络信息-->
+                            <!--中心等政府和专业机构的领导及多位互联网业内知名专家出席了论坛。</p>-->
+                        <!--<div class="media-footer clearfix">-->
+                            <!--<button class="delete pull-right">删除</button>-->
+                            <!--<img src="../static/img/pl.png" class="com" alt="评论" title="评论"/>-->
+                            <!--<time datatime="2017-10-21">2017/10/21</time>-->
+                            <!--<div class="comSpace vanish">-->
+                                <!--<textarea name="comText" class="comText"></textarea>-->
+                                <!--<button type="text" class="comBtn btn btn-default pull-right">评论</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+            <!--</ul>-->
         </section>
     </div>
 </div>
 <script src="../static/js/validate.js"></script>
-<script src="../static/js/request.js.js"></script>
+<script src="../static/js/request.js"></script>
 </body>
 </html>
