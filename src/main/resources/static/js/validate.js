@@ -101,15 +101,18 @@ $('.signBtn:first').on('click',function () {
             url:"",
             data:{
                 "name1":$('#name1').val(),
-                "password1":$('#password1').val()
+                "password1":$('#password1').val(),
+                "userCode":$('#identify1').val()
             },
             success:function (data) {
-                if(data){
+                if(data == 0){
                     alert('注册成功！请登录！');
                     $('#mySign').modal('hide');
                     $('#myLogin').modal('show');
                 }
-                else {
+                else if(data == 1) {
+                    alert('验证码错误！')
+                }else{
                     alert('该用户已存在！')
                 }
             },
@@ -196,6 +199,10 @@ $('#pub').on('click',function () {
         })
     }
 })
-//评论
+//刷新验证码
+var img_src ='图片地址?t='+Math.random();
+$('.change:first').on('click',function () {
+    $('.identify:first').src = img_src;
+})
 
 

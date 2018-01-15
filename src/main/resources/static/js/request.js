@@ -82,7 +82,7 @@ $.ajax({
                     success:function (data) {
                         if(data){
                             alert('回复成功！');
-
+                            window.location.reload();
                         } else {
                             alert('回复失败！')
                         }
