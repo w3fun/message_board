@@ -1,4 +1,4 @@
-package com.Entity;
+package com.model;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;

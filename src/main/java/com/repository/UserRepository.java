@@ -1,11 +1,9 @@
-package com.Dao;
+package com.repository;
 
-import com.Entity.User;
+import com.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 /**
  * @Author: ZhangOcean
