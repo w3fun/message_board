@@ -67,32 +67,25 @@ $('#myLogin input').eq(1).on('blur',function () {
         $('.prompt').eq(1).css('visibility','hidden');
     }
 })
-$('#myLogin input').eq(2).on('blur',function () {
-    if($(this).val() == ''){
-        $('.prompt').eq(2).css('visibility','visible');
-    }else {
-        $('.prompt').eq(2).css('visibility', 'hidden');
-    }
-})
 $('#mySign input').eq(0).on('blur',function () {
     if($(this).val().indexOf(' ') != -1 || $(this).val() == ''){
+        $('.prompt').eq(2).css('visibility','visible');
+    }else{
+        $('.prompt').eq(2).css('visibility','hidden');
+    }
+})
+$('#mySign input').eq(1).on('blur',function () {
+    if(!reg.test($(this).val()) || $(this).val() == ''){
         $('.prompt').eq(3).css('visibility','visible');
     }else{
         $('.prompt').eq(3).css('visibility','hidden');
     }
 })
-$('#mySign input').eq(1).on('blur',function () {
-    if(!reg.test($(this).val()) || $(this).val() == ''){
+$('#mySign input').eq(2).on('blur',function () {
+    if($(this).val() == ''){
         $('.prompt').eq(4).css('visibility','visible');
     }else{
         $('.prompt').eq(4).css('visibility','hidden');
-    }
-})
-$('#mySign input').eq(2).on('blur',function () {
-    if(!reg.test($(this).val()) || $(this).val() == ''){
-        $('.prompt').eq(5).css('visibility','visible');
-    }else{
-        $('.prompt').eq(5).css('visibility','hidden');
     }
 })
 //提交注册信息并跳转页面
@@ -108,15 +101,18 @@ $('.signBtn:first').on('click',function () {
             url:"",
             data:{
                 "name1":$('#name1').val(),
-                "password1":$('#password1').val()
+                "password1":$('#password1').val(),
+                "userCode":$('#identify1').val()
             },
             success:function (data) {
-                if(data){
+                if(data == 0){
                     alert('注册成功！请登录！');
                     $('#mySign').modal('hide');
                     $('#myLogin').modal('show');
                 }
-                else {
+                else if(data == 1) {
+                    alert('验证码错误！')
+                }else{
                     alert('该用户已存在！')
                 }
             },
@@ -130,7 +126,7 @@ $('.signBtn:first').on('click',function () {
 //记住密码
 $('.loginBtn:first').on('click',function () {
     var flag = true;
-    for(var j = 0;j < 3;j ++)
+    for(var j = 0;j < 2;j ++)
     {
         if($('#myLogin input').eq(j).val() == '')
         {
@@ -203,6 +199,10 @@ $('#pub').on('click',function () {
         })
     }
 })
-//评论
+//刷新验证码
+var img_src ='图片地址?t='+Math.random();
+$('.change:first').on('click',function () {
+    $('.identify:first').src = img_src;
+})
 
 
