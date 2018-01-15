@@ -29,6 +29,28 @@ oWord.on('keydown',function () {
 oWord.on('keyup',function () {
     $('#counter').text(oWord.val().length);
 })
+//限制验证码只能输字母和数字
+$.fn.onlyNumAlpha = function () {
+    $(this).keypress(function (event) {
+        var eventObj = event || e;
+        var keyCode = eventObj.keyCode || eventObj.which;
+        if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122))
+            return true;
+        else
+            return false;
+    }).focus(function () {
+        this.style.imeMode = 'disabled';//禁止中文输入法 兼容性：只支持IE和FF
+    }).bind("paste", function () {
+        var clipboard = window.clipboardData.getData("Text");//获取剪贴板里的内容
+        if (/^(\d|[a-zA-Z])+$/.test(clipboard))
+            return true;
+        else
+            return false;
+    });
+};
+$(function () {
+    $('.identify').onlyNumAlpha();
+})
 //登录注册验证
 var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/;
 $('#myLogin input').eq(0).on('blur',function () {
@@ -45,26 +67,40 @@ $('#myLogin input').eq(1).on('blur',function () {
         $('.prompt').eq(1).css('visibility','hidden');
     }
 })
-$('#mySign input').eq(0).on('blur',function () {
-    if($(this).val().indexOf(' ') != -1 || $(this).val() == ''){
+$('#myLogin input').eq(2).on('blur',function () {
+    if($(this).val() == ''){
         $('.prompt').eq(2).css('visibility','visible');
-    }else{
-        $('.prompt').eq(2).css('visibility','hidden');
+    }else {
+        $('.prompt').eq(2).css('visibility', 'hidden');
     }
 })
-$('#mySign input').eq(1).on('blur',function () {
-    if(!reg.test($(this).val()) || $(this).val() == ''){
+$('#mySign input').eq(0).on('blur',function () {
+    if($(this).val().indexOf(' ') != -1 || $(this).val() == ''){
         $('.prompt').eq(3).css('visibility','visible');
     }else{
         $('.prompt').eq(3).css('visibility','hidden');
     }
 })
+$('#mySign input').eq(1).on('blur',function () {
+    if(!reg.test($(this).val()) || $(this).val() == ''){
+        $('.prompt').eq(4).css('visibility','visible');
+    }else{
+        $('.prompt').eq(4).css('visibility','hidden');
+    }
+})
+$('#mySign input').eq(2).on('blur',function () {
+    if(!reg.test($(this).val()) || $(this).val() == ''){
+        $('.prompt').eq(5).css('visibility','visible');
+    }else{
+        $('.prompt').eq(5).css('visibility','hidden');
+    }
+})
 //提交注册信息并跳转页面
 $('.signBtn:first').on('click',function () {
     var signInput = $('#mySign input');
-    if(!reg.test(signInput.eq(1).val())||signInput.eq(1).val() == ''
+    if(signInput.eq(2).val() == '' || !reg.test(signInput.eq(1).val())||signInput.eq(1).val() == ''
         || signInput.eq(0).val().indexOf(' ') != -1 || signInput.eq(0).val() == ''){
-
+        alert('请正确填写信息');
     }else {
         $.ajax({
             type:"POST",
@@ -77,8 +113,8 @@ $('.signBtn:first').on('click',function () {
             success:function (data) {
                 if(data){
                     alert('注册成功！请登录！');
-                    $('#mySign').fadeOut();
-                    $('#myLogin').fadeIn();
+                    $('#mySign').modal('hide');
+                    $('#myLogin').modal('show');
                 }
                 else {
                     alert('该用户已存在！')
@@ -94,7 +130,7 @@ $('.signBtn:first').on('click',function () {
 //记住密码
 $('.loginBtn:first').eq(0).on('click',function () {
     var flag = true;
-    for(var j = 0;j < 2;j ++)
+    for(var j = 0;j < 3;j ++)
     {
         if($('#myLogin input').eq(j).val() == '')
         {
@@ -119,15 +155,18 @@ $('.loginBtn:first').eq(0).on('click',function () {
                     sessionStorage.setItem('lybName',$('#myLogin input').eq(0).val());
                     sessionStorage.setItem('lybPassword',$('#myLogin input').eq(1).val());
                     alert('登录成功！');
+                    $('#myLogin').modal('hide');
+                    $('.login-box').html('welcome! ' + sessionStorage.getItem('lybName'));
                 }else {
                     alert('登录失败！请检查用户名和密码是否正确')
                 }
             },
             error:function () {
                 alert('登录失败，请刷新重试');
-                $('#myLogin').hide();
             }
         })
+    }else{
+        alert('请正确填写信息');
     }
 })
 if(localStorage.getItem("lybName") != '' && localStorage.getItem("lybPassWord") != '')
@@ -141,8 +180,28 @@ $('#pub').on('click',function () {
     if($('#word').val() == '') {
         alert('发表内容不能为空！');
     }else {
+        var myDate = new Date();
         $.ajax({
-
+            type:'POST',
+            url:'',
+            dataType:'json',
+            data:{
+                "author":sessionStorage.getItem('lybName'),
+                "date":myDate.getFullYear()+ '/' +(myDate.getMonth()+1)+ '/' +myDate.getDay(),
+                "content":$('#word').val()
+            },
+            success:function (data) {
+                if(data){
+                    alert('发表成功！');
+                }else {
+                    alert('发表失败！');
+                }
+            },
+            error:function () {
+                alert('发表失败，请刷新重试');
+            }
         })
     }
 })
+
+
