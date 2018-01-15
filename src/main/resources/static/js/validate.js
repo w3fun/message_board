@@ -200,9 +200,9 @@ $('#pub').on('click',function () {
     }
 })
 //刷新验证码
-var img_src ='图片地址?t='+Math.random();
-$('.change:first').on('click',function () {
-    $('.identify:first').src = img_src;
+var img_src ='图片地址?t=' + new Date().getTime();
+$('.change').on('click',function () {
+    $('.identify').attr('src',img_src);
 })
 
 
