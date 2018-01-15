@@ -30,7 +30,7 @@ $.ajax({
                 '                            <time datatime="'+ data.message[i].date +'"> '+ data.message[i].date + '</time>' + '' +
                 '                            <div class="comSpace vanish">' +
                 '                                <textarea name="comText" class="comText"></textarea>' +
-                '                                <button type="text" class="comBtn btn btn-default pull-right">评论</button>' +
+                '                                <button type="text" class="comBtn btn btn-default pull-right" index="' + data.message[i].index + '">评论</button>' +
                 '                            </div>' +
                 '                        </div>' +
                 '                    </div>' +
@@ -76,11 +76,13 @@ $.ajax({
                     url:'',
                     dataType:'json',
                     data:{
-                        "comment":sibling
+                        "comment":sibling,
+                        "index":$(this).attr('index')
                     },
                     success:function (data) {
                         if(data){
-                            alert('回复成功！')
+                            alert('回复成功！');
+
                         } else {
                             alert('回复失败！')
                         }
