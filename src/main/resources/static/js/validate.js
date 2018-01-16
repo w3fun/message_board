@@ -34,7 +34,7 @@ $.fn.onlyNumAlpha = function () {
     $(this).keypress(function (event) {
         var eventObj = event || e;
         var keyCode = eventObj.keyCode || eventObj.which;
-        if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122))
+        if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 8)
             return true;
         else
             return false;
@@ -98,7 +98,7 @@ $('.signBtn:first').on('click',function () {
         $.ajax({
             type:"POST",
             dataType:"json",
-            url:"/doRegister",
+            url:"",
             data:{
                 "name1":$('#name1').val(),
                 "password1":$('#password1').val(),
@@ -136,7 +136,7 @@ $('.loginBtn:first').on('click',function () {
     if(flag) {
         $.ajax({
             type:"POST",
-            url:"/doLogin",
+            url:"",
             dataType:'json',
             data:{
                 "name":$('#name').val(),
@@ -175,20 +175,22 @@ if(localStorage.getItem("lybName") != '' && localStorage.getItem("lybPassWord") 
 $('#pub').on('click',function () {
     if($('#word').val() == '') {
         alert('发表内容不能为空！');
-    }else {
-        var myDate = new Date();
+    }else if(!sessionStorage.getItem('lybName')){
+        alert('请先登录')
+    } else {
         $.ajax({
             type:'POST',
-            url:'/publish',
+            url:'',
             dataType:'json',
             data:{
                 "author":sessionStorage.getItem('lybName'),
-                "date":myDate.getFullYear()+ '/' +(myDate.getMonth()+1)+ '/' +myDate.getDay(),
                 "content":$('#word').val()
             },
             success:function (data) {
-                if(data){
+                if(data == 200){
                     alert('发表成功！');
+                    $('#word').val('');
+                    request();
                 }else {
                     alert('发表失败！');
                 }
@@ -200,9 +202,8 @@ $('#pub').on('click',function () {
     }
 })
 //刷新验证码
-var img_src ='/getCheckCode?t='+Math.random();
 $('.change:first').on('click',function () {
-    $('.identify:first').attr('src',img_src);
+    var img_src ='/getCheckCode?t='+Math.random();
+    $('.identifyPic').attr('src',img_src);
 })
-
 
