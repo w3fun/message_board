@@ -42,17 +42,37 @@ $.ajax({
             if(!isEmptyObject(data.message[i].comment)) {
                 var hr = $('<hr/>');
                 $('.comment').eq(i).append(hr);
-                for (var j = 0; j < data.message[i].comment.length; j++) {
-                    var comContent = $('<li class="media">' +
+                if(data.message[i].comment.length <= 3)
+                {
+                    for (var j = 0; j < data.message[i].comment.length; j++) {
+                        var comContent = $('<li class="media">' +
+                            '                                <div class="media-left">' +
+                            '                                    <img src="../static/img/girl-2.png" alt="头像"/>' +
+                            '                                    <span>' + data.message[i].comment[j].author + '</span>' +
+                            '                                </div>' +
+                            '                                <div class="media-body">' +
+                            '                                    <p>' + data.message[i].comment[j].content + '</p>' +
+                            '                                    <div class="media-footer">' +
+                            '                                        <button class="delete pull-right">删除</button>' +
+                            '                                        <time datatime="' + data.message[i].comment[j].date + '">' + data.message[i].comment[j].date + '</time>' +
+                            '                                    </div>' +
+                            '                                </div>' +
+                            '                            </li>');
+                        $('.comment').eq(i).append(comContent);
+                    }
+                }else{
+                    var last = data.message[i].comment.length - 1;
+                    var comContent = $('<div index="'+ data.message[i].index +'"><a class="omit" href="javascript:;" title="点击查看更多评论">...</a></div>' +
+                        '<li class="media">' +
                         '                                <div class="media-left">' +
                         '                                    <img src="../static/img/girl-2.png" alt="头像"/>' +
-                        '                                    <span>' + data.message[i].comment[j].author + '</span>' +
+                        '                                    <span>' + data.message[i].comment[last].author + '</span>' +
                         '                                </div>' +
                         '                                <div class="media-body">' +
-                        '                                    <p>' + data.message[i].comment[j].content + '</p>' +
+                        '                                    <p>' + data.message[i].comment[last].content + '</p>' +
                         '                                    <div class="media-footer">' +
                         '                                        <button class="delete pull-right">删除</button>' +
-                        '                                        <time datatime="' + data.message[i].comment[j].date + '">' + data.message[i].comment[j].date + '</time>' +
+                        '                                        <time datatime="' + data.message[i].comment[last].date + '">' + data.message[i].comment[j].date + '</time>' +
                         '                                    </div>' +
                         '                                </div>' +
                         '                            </li>');
@@ -60,6 +80,27 @@ $.ajax({
                 }
             }
         }
+        $('.omit').on('click',function () {
+            var parentDiv = $(this).parent();
+            parentDiv.html('');
+            for(var j = 0;j < data.message[parentDiv.attr('index')].comment.length - 1;j ++)
+            {
+                var comContent = $('<li class="media">' +
+                    '                                <div class="media-left">' +
+                    '                                    <img src="../static/img/girl-2.png" alt="头像"/>' +
+                    '                                    <span>' + data.message[parentDiv.attr('index')].comment[j].author + '</span>' +
+                    '                                </div>' +
+                    '                                <div class="media-body">' +
+                    '                                    <p>' + data.message[parentDiv.attr('index')].comment[j].content + '</p>' +
+                    '                                    <div class="media-footer">' +
+                    '                                        <button class="delete pull-right">删除</button>' +
+                    '                                        <time datatime="' + data.message[parentDiv.attr('index')].comment[j].date + '">' + data.message[parentDiv.attr('index')].comment[j].date + '</time>' +
+                    '                                    </div>' +
+                    '                                </div>' +
+                    '                            </li>');
+                parentDiv.append(comContent);
+            }
+        })
         $.each($('.com'),function (i,domEle) {
             $(domEle).on('click',function () {
                 $('.comSpace').eq(i).toggleClass('vanish');

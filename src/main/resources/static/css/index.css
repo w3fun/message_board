@@ -174,4 +174,14 @@ ul.media-list{
 .vanish{
     display: none;
 }
+.omit{
+    font-size: 2rem;
+    color: #0f0f0f;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.omit:hover{
+    text-decoration: none;
+}
 
