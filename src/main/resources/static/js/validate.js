@@ -98,7 +98,7 @@ $('.signBtn:first').on('click',function () {
         $.ajax({
             type:"POST",
             dataType:"json",
-            url:"",
+            url:"/doRegister",
             data:{
                 "name1":$('#name1').val(),
                 "password1":$('#password1').val(),
@@ -136,14 +136,14 @@ $('.loginBtn:first').on('click',function () {
     if(flag) {
         $.ajax({
             type:"POST",
-            url:"",
+            url:"/doLogin",
             dataType:'json',
             data:{
                 "name":$('#name').val(),
                 "password":$('#password').val()
             },
             success:function (data) {
-                if(data){
+                if(data == 0){
                     if($('#remember').attr('checked') == 'checked'){
                         localStorage.setItem('lybName',$('#myLogin input').eq(0).val());
                         localStorage.setItem('lybPassword',$('#myLogin input').eq(1).val());
@@ -179,7 +179,7 @@ $('#pub').on('click',function () {
         var myDate = new Date();
         $.ajax({
             type:'POST',
-            url:'',
+            url:'/publish',
             dataType:'json',
             data:{
                 "author":sessionStorage.getItem('lybName'),
@@ -200,9 +200,9 @@ $('#pub').on('click',function () {
     }
 })
 //刷新验证码
-var img_src ='图片地址?t='+Math.random();
+var img_src ='/getCheckCode?t='+Math.random();
 $('.change:first').on('click',function () {
-    $('.identify:first').src = img_src;
+    $('.identify:first').attr('src',img_src);
 })
 
 

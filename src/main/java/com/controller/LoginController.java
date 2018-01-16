@@ -1,10 +1,13 @@
 package com.controller;
 
+import com.component.CheckUserMatch;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,24 +21,24 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Autowired
-    UserController userController ;
+    CheckUserMatch checkUserMatch;
 
     @RequestMapping("/doLogin")
-    public String login(HttpServletRequest request, Model model) {
+    @ResponseBody
+    public int doLogin(HttpServletRequest request, Model model) {
 
         User user = new User();
 
         user.setUser_Name(request.getParameter("name"));
         user.setUser_Password(request.getParameter("password"));
 
+        System.out.println(user.getUser_Name());
         model.addAttribute("user",user);
 
-        if(userController.getByUser(user)){
+        int checkMath = checkUserMatch.checkUserMatch(user.getUser_Name(), user.getUser_Password());
 
-            return "successLogin";
-        }
-
-        return "fail";
+        System.out.println(checkMath);
+        return checkMath;
     }
 
 }

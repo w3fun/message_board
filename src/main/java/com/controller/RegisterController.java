@@ -1,12 +1,13 @@
 package com.controller;
 
 import com.component.CheckCode;
-import com.repository.UserRepository;
+import com.component.CheckUserExist;
 import com.model.User;
+import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,22 +26,29 @@ public class RegisterController {
     @Autowired
     private CheckCode checkCode;
 
-    @RequestMapping("/doRegister")
+    @Autowired
+    private CheckUserExist checkUserExist;
+
+    @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean register(HttpServletRequest request) {
+    public int register(HttpServletRequest request) {
 
         String name = request.getParameter("name1");
         String password = request.getParameter("password1");
-        String userCode = request.getParameter("userCode1");
+        String userCode = request.getParameter("userCode");
 
         User user = new User(name, password);
 
-        Boolean code = checkCode.checkCode(request,userCode);
+        int code = checkCode.checkCode(request,userCode);
 
-        if(code){
-            userRepository.save(user);
+        int checkUser = checkUserExist.checkUserExist(name);
+        if(code == 0){
+            if(checkUser == 0){
+                userRepository.save(user);
+            } else {
+                return checkUser;
+            }
         }
-        System.out.println(code.toString());
 
         return code;
     }
