@@ -1,4 +1,5 @@
-function request() {
+var firstLength = 4;
+function request(firstLength) {
     //页面加载时请求，将内容填充到页面
     $.ajax({
         type:'POST',
@@ -9,6 +10,7 @@ function request() {
         },
         success:function (data) {
             // console.log(data.message[0]);
+            var minLength = Math.min(firstLength,data.message.length);
             function isEmptyObject(e) {
                 var t;
                 for (t in e)
@@ -16,72 +18,77 @@ function request() {
                 return !0
             }
             $('#pub_words').html('');
-            for(var i = 0;i < data.message.length;i ++)
-            {
-                var message = $(' <ul class="media-list ul-list">' +
-                    '                <li class="media">' +
-                    '                    <div class="media-left">' +
-                    '                        <img src="../static/img/boy.png" alt="头像"/>' +
-                    '                        <span>'+ data.message[i].author +'</span>' +
-                    '                    </div>' +
-                    '                    <div class="media-body message">' +
-                    '                        <p>'+ data.message[i].content +'</p>' +
-                    '                        <div class="media-footer clearfix">' +
-                    '                            <button class="delete pull-right">删除</button>' +
-                    '                            <img src="../static/img/pl.png" class="com" alt="评论" title="评论"/>' +
-                    '                            <time datatime="'+ data.message[i].date +'"> '+ data.message[i].date + '</time>' + '' +
-                    '                            <div class="comSpace vanish">' +
-                    '                                <textarea name="comText" class="comText"></textarea>' +
-                    '                                <button type="text" class="comBtn btn btn-default pull-right" index="' + data.message[i].index + '">评论</button>' +
-                    '                            </div>' +
-                    '                        </div>' +
-                    '                    </div>' +
-                    '                </li>' +
-                    '            </ul>')
-                $('#pub_words').append(message);
-                var comment = $('<ul class="media-list comment"></ul>');
-                $('.message').eq(i).append(comment);
-                if(!isEmptyObject(data.message[i].comment)) {
-                    var hr = $('<hr/>');
-                    $('.comment').eq(i).append(hr);
-                    if(data.message[i].comment.length <= 3)
-                    {
-                        for (var j = 0; j < data.message[i].comment.length; j++) {
-                            var comContent = $('<li class="media">' +
+            for(var i = 0;i < minLength;i ++) {
+                    var message = $(' <ul class="media-list ul-list">' +
+                        '                <li class="media">' +
+                        '                    <div class="media-left">' +
+                        '                        <img src="../static/img/boy.png" alt="头像"/>' +
+                        '                        <span>'+ data.message[i].author +'</span>' +
+                        '                    </div>' +
+                        '                    <div class="media-body message">' +
+                        '                        <p>'+ data.message[i].content +'</p>' +
+                        '                        <div class="media-footer clearfix">' +
+                        '                            <button class="delete pull-right">删除</button>' +
+                        '                            <img src="../static/img/pl.png" class="com" alt="评论" title="评论"/>' +
+                        '                            <time datatime="'+ data.message[i].date +'"> '+ data.message[i].date + '</time>' + '' +
+                        '                            <div class="comSpace vanish">' +
+                        '                                <textarea name="comText" class="comText"></textarea>' +
+                        '                                <button type="text" class="comBtn btn btn-default pull-right" index="' + data.message[i].index + '">评论</button>' +
+                        '                            </div>' +
+                        '                        </div>' +
+                        '                    </div>' +
+                        '                </li>' +
+                        '            </ul>')
+                    $('#pub_words').append(message);
+                    var comment = $('<ul class="media-list comment"></ul>');
+                    $('.message').eq(i).append(comment);
+                    if(!isEmptyObject(data.message[i].comment)) {
+                        var hr = $('<hr/>');
+                        $('.comment').eq(i).append(hr);
+                        if(data.message[i].comment.length <= 3) {
+                            for (var j = 0; j < data.message[i].comment.length; j++) {
+                                var comContent = $('<li class="media">' +
+                                    '                                <div class="media-left">' +
+                                    '                                    <img src="../static/img/girl-2.png" alt="头像"/>' +
+                                    '                                    <span>' + data.message[i].comment[j].author + '</span>' +
+                                    '                                </div>' +
+                                    '                                <div class="media-body">' +
+                                    '                                    <p>' + data.message[i].comment[j].content + '</p>' +
+                                    '                                    <div class="media-footer">' +
+                                    '                                        <button class="delete pull-right">删除</button>' +
+                                    '                                        <time datatime="' + data.message[i].comment[j].date + '">' + data.message[i].comment[j].date + '</time>' +
+                                    '                                    </div>' +
+                                    '                                </div>' +
+                                    '                            </li>');
+                                $('.comment').eq(i).append(comContent);
+                            }
+                        }else{
+                            var last = data.message[i].comment.length - 1;
+                            var comContent = $('<div index="'+ data.message[i].index +'"><a class="omit" href="javascript:;" title="点击查看更多评论">...</a></div>' +
+                                '<li class="media">' +
                                 '                                <div class="media-left">' +
                                 '                                    <img src="../static/img/girl-2.png" alt="头像"/>' +
-                                '                                    <span>' + data.message[i].comment[j].author + '</span>' +
+                                '                                    <span>' + data.message[i].comment[last].author + '</span>' +
                                 '                                </div>' +
                                 '                                <div class="media-body">' +
-                                '                                    <p>' + data.message[i].comment[j].content + '</p>' +
+                                '                                    <p>' + data.message[i].comment[last].content + '</p>' +
                                 '                                    <div class="media-footer">' +
                                 '                                        <button class="delete pull-right">删除</button>' +
-                                '                                        <time datatime="' + data.message[i].comment[j].date + '">' + data.message[i].comment[j].date + '</time>' +
+                                '                                        <time datatime="' + data.message[i].comment[last].date + '">' + data.message[i].comment[j].date + '</time>' +
                                 '                                    </div>' +
                                 '                                </div>' +
                                 '                            </li>');
                             $('.comment').eq(i).append(comContent);
                         }
-                    }else{
-                        var last = data.message[i].comment.length - 1;
-                        var comContent = $('<div index="'+ data.message[i].index +'"><a class="omit" href="javascript:;" title="点击查看更多评论">...</a></div>' +
-                            '<li class="media">' +
-                            '                                <div class="media-left">' +
-                            '                                    <img src="../static/img/girl-2.png" alt="头像"/>' +
-                            '                                    <span>' + data.message[i].comment[last].author + '</span>' +
-                            '                                </div>' +
-                            '                                <div class="media-body">' +
-                            '                                    <p>' + data.message[i].comment[last].content + '</p>' +
-                            '                                    <div class="media-footer">' +
-                            '                                        <button class="delete pull-right">删除</button>' +
-                            '                                        <time datatime="' + data.message[i].comment[last].date + '">' + data.message[i].comment[j].date + '</time>' +
-                            '                                    </div>' +
-                            '                                </div>' +
-                            '                            </li>');
-                        $('.comment').eq(i).append(comContent);
                     }
-                }
-            }
+                };
+            if(minLength == firstLength){
+                var nextBtn = $('<a href="javascript:;" class="nextBtn">查看更多</a>');
+                $('#pub_words').append(nextBtn);
+            };
+            $('.nextBtn').on('click',function () {
+                request(2*firstLength);
+            })
             $('.omit').on('click',function () {
                 var parentDiv = $(this).parent();
                 parentDiv.html('');
@@ -143,4 +150,4 @@ function request() {
         }
     })
 }
-request();
+request(firstLength);

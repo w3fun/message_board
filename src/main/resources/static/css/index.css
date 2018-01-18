@@ -184,4 +184,12 @@ ul.media-list{
 .omit:hover{
     text-decoration: none;
 }
+.nextBtn{
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background: rgba(38, 90, 136, 0.13);
+    text-align: center;
+}
 
