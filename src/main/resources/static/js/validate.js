@@ -190,7 +190,7 @@ $('#pub').on('click',function () {
                 if(data == 0){
                     alert('发表成功！');
                     $('#word').val('');
-                    request();
+                    request(firstLength);
                 }else {
                     alert('发表失败！');
                 }
