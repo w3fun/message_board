@@ -26,7 +26,7 @@ public class PublishController {
 
     @RequestMapping(value = "/publish", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean publishMessage(HttpServletRequest request){
+    public int publishMessage(HttpServletRequest request){
 
         String utterer = request.getParameter("author");
         String content = request.getParameter("content");
@@ -39,7 +39,7 @@ public class PublishController {
 
         LeaveWord leaveWord = new LeaveWord(utterer, publishDate, content);
 
-        Boolean saveSuccess = saveLeaveWord.saveLeaveWord(leaveWord);
+        int saveSuccess = saveLeaveWord.saveLeaveWord(leaveWord);
 
         return saveSuccess;
     }

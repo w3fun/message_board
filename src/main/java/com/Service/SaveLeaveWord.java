@@ -17,14 +17,14 @@ public class SaveLeaveWord {
     @Autowired
     LeaveWordRepository leaveWordRepository;
 
-    public Boolean saveLeaveWord(LeaveWord leaveWord){
+    public int saveLeaveWord(LeaveWord leaveWord){
 
-//        try {
+        try {
             leaveWordRepository.save(leaveWord);
-            return true;
-//        }catch (Exception e){
-//            return false;
-//        }
+            return 0;
+        }catch (Exception e){
+            return 1;
+        }
     }
 
 }

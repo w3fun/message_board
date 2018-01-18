@@ -98,7 +98,7 @@ $('.signBtn:first').on('click',function () {
         $.ajax({
             type:"POST",
             dataType:"json",
-            url:"",
+            url:"/doRegister",
             data:{
                 "name1":$('#name1').val(),
                 "password1":$('#password1').val(),
@@ -136,7 +136,7 @@ $('.loginBtn:first').on('click',function () {
     if(flag) {
         $.ajax({
             type:"POST",
-            url:"",
+            url:"/doLogin",
             dataType:'json',
             data:{
                 "name":$('#name').val(),
@@ -180,14 +180,14 @@ $('#pub').on('click',function () {
     } else {
         $.ajax({
             type:'POST',
-            url:'',
+            url:'/publish',
             dataType:'json',
             data:{
                 "author":sessionStorage.getItem('lybName'),
                 "content":$('#word').val()
             },
             success:function (data) {
-                if(data == 200){
+                if(data == 0){
                     alert('发表成功！');
                     $('#word').val('');
                     request();
