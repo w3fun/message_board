@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.component.CheckUserMatch;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
